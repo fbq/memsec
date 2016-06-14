@@ -11,7 +11,7 @@
 
 extern crate test;
 extern crate libc;
-extern crate libsodium_sys;
+// extern crate libsodium_sys;
 extern crate memsec;
 
 use test::Bencher;
@@ -26,11 +26,11 @@ fn memsec_malloc(b: &mut Bencher) {
     });
 }
 
-#[bench]
-fn libsodium_malloc(b: &mut Bencher) {
-    unsafe { libsodium_sys::sodium_init() };
-    b.iter(|| unsafe {
-        let ptr: *mut u8 = libsodium_sys::sodium_malloc(1024) as *mut u8;
-        libsodium_sys::sodium_free(ptr as *mut c_void);
-    });
-}
+// #[bench]
+// fn libsodium_malloc(b: &mut Bencher) {
+//     unsafe { libsodium_sys::sodium_init() };
+//     b.iter(|| unsafe {
+//         let ptr: *mut u8 = libsodium_sys::sodium_malloc(1024) as *mut u8;
+//         libsodium_sys::sodium_free(ptr as *mut c_void);
+//     });
+// }

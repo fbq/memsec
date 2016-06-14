@@ -177,8 +177,8 @@ pub unsafe fn free<T>(memptr: *mut T) {
     ::mprotect(base_ptr, total_size, ::Prot::ReadWrite);
 
     // check
-    debug_assert_eq!(::memcmp(canary_ptr as *const u8, CANARY.as_ptr(), mem::size_of_val(&CANARY)), 0);
-    debug_assert_eq!(::memcmp(
+    assert_eq!(::memcmp(canary_ptr as *const u8, CANARY.as_ptr(), mem::size_of_val(&CANARY)), 0);
+    assert_eq!(::memcmp(
         unprotected_ptr.offset(unprotected_size as isize) as *const u8,
         CANARY.as_ptr(),
         mem::size_of_val(&CANARY)

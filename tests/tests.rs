@@ -1,6 +1,6 @@
 extern crate memsec;
 #[cfg(unix)] extern crate nix;
-extern crate libsodium_sys;
+// extern crate libsodium_sys;
 
 use std::mem;
 
@@ -23,14 +23,15 @@ fn memcmp_test() {
     let z = [4; 16];
 
     assert_eq!(unsafe { memsec::memcmp(x.as_ptr(), y.as_ptr(), mem::size_of_val(&x)) }, 0);
-    assert_eq!(
-        unsafe { memsec::memcmp(x.as_ptr(), z.as_ptr(), mem::size_of_val(&x)) },
-        unsafe { libsodium_sys::sodium_memcmp(
-            x.as_ptr() as *const u8,
-            z.as_ptr() as *const u8,
-            mem::size_of_val(&x)
-        ) }
-    );
+    assert_eq!(unsafe { memsec::memcmp(x.as_ptr(), z.as_ptr(), mem::size_of_val(&x)) }, -1);
+    // assert_eq!(
+    //     unsafe { memsec::memcmp(x.as_ptr(), z.as_ptr(), mem::size_of_val(&x)) },
+    //     unsafe { libsodium_sys::sodium_memcmp(
+    //         x.as_ptr() as *const u8,
+    //         z.as_ptr() as *const u8,
+    //         mem::size_of_val(&x)
+    //     ) }
+    // );
 }
 
 #[test]
