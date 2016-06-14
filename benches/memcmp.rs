@@ -15,7 +15,7 @@
 
 extern crate test;
 extern crate libc;
-extern crate libsodium_sys;
+// extern crate libsodium_sys;
 extern crate memsec;
 
 use test::Bencher;
@@ -43,25 +43,25 @@ fn memsec_memcmp_nq_bench(b: &mut Bencher) {
     });
 }
 
-#[bench]
-fn libsodium_memcmp_eq_bench(b: &mut Bencher) {
-    let x = [9; 1024];
-    let y = [9; 1024];
-
-    b.iter(|| unsafe {
-        libsodium_sys::sodium_memcmp(x.as_ptr(), y.as_ptr(), size_of_val(&y))
-    });
-}
-
-#[bench]
-fn libsodium_memcmp_nq_bench(b: &mut Bencher) {
-    let x = [8; 1024];
-    let z = [3; 1024];
-
-    b.iter(|| unsafe {
-        libsodium_sys::sodium_memcmp(x.as_ptr(), z.as_ptr(), size_of_val(&z))
-    });
-}
+// #[bench]
+// fn libsodium_memcmp_eq_bench(b: &mut Bencher) {
+//     let x = [9; 1024];
+//     let y = [9; 1024];
+// 
+//     b.iter(|| unsafe {
+//         libsodium_sys::sodium_memcmp(x.as_ptr(), y.as_ptr(), size_of_val(&y))
+//     });
+// }
+// 
+// #[bench]
+// fn libsodium_memcmp_nq_bench(b: &mut Bencher) {
+//     let x = [8; 1024];
+//     let z = [3; 1024];
+// 
+//     b.iter(|| unsafe {
+//         libsodium_sys::sodium_memcmp(x.as_ptr(), z.as_ptr(), size_of_val(&z))
+//     });
+// }
 
 #[bench]
 fn libc_memcmp_eq_bench(b: &mut Bencher) {
